@@ -1,56 +1,56 @@
 
-	Powershell windows tarafından sistem ve sunucu yönetimi için geliştirilmiş bir komut satırı
-uygulamasıdır(CLI).   Powershell içeriside Command-let(Cmdlet) özel komutlar dizisi bulunur. 
-Bu komutları kullanarak sistem hakkında geniş bilgilere sahip olunabilir. Bunun yanı sıra sistemde
-bulunan diğer programlar ile doğrudan ilişki içerisindedir ve bunları kullanarakta sistem içerisinde
-yönetim ve bilgi toplama sağlanabilir. 
+   Powershell windows tarafÄ±ndan sistem ve sunucu yÃ¶netimi iÃ§in geliÅŸtirilmiÅŸ bir komut satÄ±rÄ±
+uygulamasÄ±dÄ±r(CLI).   Powershell iÃ§eriside Command-let(Cmdlet) Ã¶zel komutlar dizisi bulunur. 
+Bu komutlarÄ± kullanarak sistem hakkÄ±nda geniÅŸ bilgilere sahip olunabilir. Bunun yanÄ± sÄ±ra sistemde
+bulunan diÄŸer programlar ile doÄŸrudan iliÅŸki iÃ§erisindedir ve bunlarÄ± kullanarakta sistem iÃ§erisinde
+yÃ¶netim ve bilgi toplama saÄŸlanabilir. 
 
-	ActiveDirectory Microsoft ağlarında kullanılan bir barındırma servisidir. Burada sunucular,
-kullanıcılar ve diğer ortamlar yer alabilir. Bu cihazların merkezi yönetimni sağlar. Buranın en temel
-bileşeni DOMAIN'dir. Burada bulunan diğer önemli yapı Domain Controller'dır. Active Directory'nin 
-bir kopyasıdır ve AD güncellendikçe DC'de güncellenir. 
+   ActiveDirectory Microsoft aÄŸlarÄ±nda kullanÄ±lan bir barÄ±ndÄ±rma servisidir. Burada sunucular,
+kullanÄ±cÄ±lar ve diÄŸer ortamlar yer alabilir. Bu cihazlarÄ±n merkezi yÃ¶netimni saÄŸlar. BuranÄ±n en temel
+bileÅŸeni DOMAIN'dir. Burada bulunan diÄŸer Ã¶nemli yapÄ± Domain Controller'dÄ±r. Active Directory'nin 
+bir kopyasÄ±dÄ±r ve AD gÃ¼ncellendikÃ§e DC'de gÃ¼ncellenir. 
 
-	Önce activedirectory ile ilgili fonksiyonları kullanabilmek için 'import-module activedirectory'
+   Ã–nce activedirectory ile ilgili fonksiyonlarÄ± kullanabilmek iÃ§in 'import-module activedirectory'
 ile AD import ediyoruz.
-1. Get-ADDomain : Bu fonksiyon ActiveDirectory içerisinde bulunan domain hakkında bilgileri getirmek
-için kullanılıyor. 
+1. Get-ADDomain : Bu fonksiyon ActiveDirectory iÃ§erisinde bulunan domain hakkÄ±nda bilgileri getirmek
+iÃ§in kullanÄ±lÄ±yor. 
 
 2. Get-ADDomainController : Domain Controller bilgisini getiriyor. 
 
-3. Get-ADUser  : ActiveDirectory içerisindeki kullanıcılar hakkında bilgileri görmemizi sağlıyor. 
+3. Get-ADUser  : ActiveDirectory iÃ§erisindeki kullanÄ±cÄ±lar hakkÄ±nda bilgileri gÃ¶rmemizi saÄŸlÄ±yor. 
 
-4. Get-ADGroup : ActiveDirectory'de bulunan kullanıcı grupları hakkında bilgi veriyor. 
+4. Get-ADGroup : ActiveDirectory'de bulunan kullanÄ±cÄ± gruplarÄ± hakkÄ±nda bilgi veriyor. 
 
 5. systeminfo | Where-Object { $_ -NotMatch "System Model*" -and $_ -NotMatch "S Version*"}
-Bu komut tüm sistem bilgisini getirecek ve içerisinde System model ve version bilgisini 
-hariç tutacak.  Bunları hariç tutması deneme amaçlı yapılmıştır. 
+Bu komut tÃ¼m sistem bilgisini getirecek ve iÃ§erisinde System model ve version bilgisini 
+hariÃ§ tutacak.  BunlarÄ± hariÃ§ tutmasÄ± deneme amaÃ§lÄ± yapÄ±lmÄ±ÅŸtÄ±r. 
 
 6.  gwmi -Class Win32_ComputerSystem | select name, domain
 Bilgisayar ismini ve domain ismini getirir. 
 
 7. query user /server:$SERVER 
-Sistemdeki o an aktif olan kullanıcıları gösterir. 
+Sistemdeki o an aktif olan kullanÄ±cÄ±larÄ± gÃ¶sterir. 
 
 8. schtasks | Where-Object { $_ -Match "Ready*" -or $_ -Match "Running*"}
-Sistemde bulunan zamanlanmış görevlerden o an hazır da ve çalışır durumda olanları getirir.
+Sistemde bulunan zamanlanmÄ±ÅŸ gÃ¶revlerden o an hazÄ±r da ve Ã§alÄ±ÅŸÄ±r durumda olanlarÄ± getirir.
 
 9. Get-Service | Where-Object {$_.Status -eq "Running"} 
-Sistemden bulunan servislerden o an çalışanları listeler.
+Sistemden bulunan servislerden o an Ã§alÄ±ÅŸanlarÄ± listeler.
 
 10. Get-Process
-Sistemde çalışan süreçleri görmemizi sağlar. 
+Sistemde Ã§alÄ±ÅŸan sÃ¼reÃ§leri gÃ¶rmemizi saÄŸlar. 
 
 11. Get-History
-Powershell üzerinde yapılmış olan girdileri getirir.
+Powershell Ã¼zerinde yapÄ±lmÄ±ÅŸ olan girdileri getirir.
 
 12. gwmi Win32_USBControllerDevice |%{[wmi]($_.Dependent)} | Sort Manufacturer,Description,DeviceID
-Sistemde bulunan USB cihazlarını üretici, açıklama ve id numaralarına göre listeler. 
+Sistemde bulunan USB cihazlarÄ±nÄ± Ã¼retici, aÃ§Ä±klama ve id numaralarÄ±na gÃ¶re listeler. 
 
 13. arp -a
 Arp tablosunu getirir. 
 
 14. netstat -n
-Bağlantıların rakamsal görünümünü listeler. 
+BaÄŸlantÄ±larÄ±n rakamsal gÃ¶rÃ¼nÃ¼mÃ¼nÃ¼ listeler. 
 
 15. get-wmiobject Win32_Processor | select name, description
-İşlemci modelini ve ilgili açıklamayı getirir.
+Ä°ÅŸlemci modelini ve ilgili aÃ§Ä±klamayÄ± getirir.
